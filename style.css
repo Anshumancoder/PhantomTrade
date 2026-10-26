@@ -9,6 +9,7 @@
     font-family: "Playfair Display SC", serif;
     font-weight: 700;
     font-style: normal;
+    margin-top: 40px;
 
 }
 
@@ -24,14 +25,50 @@
 
 }
 
+/*made with Uiverse(UI TEMPLATES)*/
 .navButton {
+    height: 50px;
+    margin: 5px;
+    width: 120px;
+    background: #132216;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: Consolas, Courier New, monospace;
+    border: solid #2ecc71 1px;
+    font-size: 16px;
+    color: #a3e4d7;
+    -webkit-transition: 500ms;
+    transition: 500ms;
     border-radius: 5px;
-    border-color: green;
-    background-color: transparent;
-    color: white;
-    width: 130px;
-    height: 40px;
+    background: linear-gradient(145deg, #1b3020, #132216);
+    -webkit-box-shadow: -1px -5px 15px #1e3823, 5px 5px 15px #1e3823,
+        inset 5px 5px 10px #132216, inset -5px -5px 10px #132216;
+    box-shadow: -1px -5px 15px #1e3823, 5px 5px 15px #1e3823,
+        inset 5px 5px 10px #132216, inset -5px -5px 10px #132216;
+    margin-top: 20px;
 }
+
+.navButton:hover {
+    -webkit-box-shadow: 1px 1px 13px #132216, -1px -1px 13px #2d5a36;
+    box-shadow: 1px 1px 13px #132216, -1px -1px 13px #2d5a36;
+    color: #ffffff;
+    -webkit-transition: 500ms;
+    transition: 500ms;
+}
+
+.navButton:active {
+    -webkit-box-shadow: 1px 1px 13px #132216, -1px -1px 33px #2d5a36;
+    box-shadow: 1px 1px 13px #132216, -1px -1px 33px #2d5a36;
+    color: #ffffff;
+    -webkit-transition: 100ms;
+    transition: 100ms;
+}
+
 
 a {
     text-decoration: none;
@@ -53,11 +90,13 @@ a {
     color: aliceblue;
     margin-top: 200px;
     font-size: 55px;
-  font-family: "Playfair Display SC", serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Playfair Display SC", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
+
+/*made with Uiverse(UI TEMPLATES)*/
 .getStartedButton {
     display: flex;
     padding: 11px 33px;
@@ -149,6 +188,8 @@ a {
 }
 
 
+/*made with Uiverse(UI TEMPLATES)*/
+
 .loginBox input {
     width: 350px;
     padding: 0.875rem;
@@ -238,9 +279,9 @@ a {
     font-size: 70px;
     text-align: center;
     margin-top: 100px;
-      font-family: "Playfair Display SC", serif;
-  font-weight: 400;
-  font-style: normal;
+    font-family: "Playfair Display SC", serif;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .usernameDescription {
