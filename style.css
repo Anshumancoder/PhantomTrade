@@ -5,7 +5,7 @@ body {
 .heading {
     color: white;
     margin-left: 5px;
-    font-size: 20px;
+    font-size: 27px;
     font-family: "Playfair Display SC", serif;
     font-weight: 700;
     font-style: normal;
@@ -29,6 +29,8 @@ body {
     border-color: green;
     background-color: transparent;  
     color: white;  
+    width: 130px;
+    height: 40px;
 }
 
 a {
