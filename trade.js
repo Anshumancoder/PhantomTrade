@@ -1,4 +1,4 @@
-import { activeUser } from "./userID";
+import { activeUser } from "./UserID.js";
 
 const API_KEY = 'dbfnq89r01qiahua456gdbfnq89r01qiahua4570'
 const socket = new WebSocket(`wss://ws.finnhub.io?token=${API_KEY}`) 
