@@ -1,0 +1,143 @@
+:root {
+  --bg: #080b09;
+  --panel: #101612;
+  --border: #26332a;
+  --text: #eef5f0;
+  --muted: #8c9a90;
+  --green: #39e875;
+}
+
+body {
+  margin: 0;
+  min-height: 100vh;
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.navBar {
+  position: sticky;
+  top: 0;
+  z-index: 10;
+  height: 68px;
+  background: #0c100d;
+}
+
+.tradeOptions {
+  position: fixed;
+  top: 68px;
+  bottom: 0;
+  left: 0;
+  width: 280px;
+  height: auto;
+  box-sizing: border-box;
+  margin: 0;
+  overflow-y: auto;
+  border-right: 1px solid var(--border);
+  background: var(--panel);
+}
+
+.sidebar {
+  margin: 0;
+  padding: 24px 18px;
+  color: var(--text);
+}
+
+.watchlistHeading {
+  margin-bottom: 20px;
+}
+
+.sidebarHeading {
+  margin: 0;
+  font-size: 15px;
+  font-weight: 650;
+  letter-spacing: 0.02em;
+}
+
+.searchbox {
+  position: relative;
+  width: 100%;
+}
+
+.searchStocks {
+  box-sizing: border-box;
+  width: 100%;
+  height: 42px;
+  margin-top: 0;
+  padding: 0 12px 0 36px;
+  border: 1px solid #334239;
+  border-radius: 8px;
+  outline: none;
+  background: #090d0a;
+  box-shadow: none;
+  color: var(--text);
+  font: inherit;
+  font-size: 13px;
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.searchStocks::placeholder {
+  color: var(--muted);
+}
+
+.searchStocks:hover {
+  border-color: #587261;
+  transform: none;
+  box-shadow: none;
+}
+
+.searchStocks:focus {
+  border-color: var(--green);
+  background: #090d0a;
+  color: var(--text);
+  animation: none;
+  box-shadow: 0 0 0 3px rgb(57 232 117 / 14%);
+}
+
+.searchbox::before {
+  content: "";
+  position: absolute;
+  top: 13px;
+  left: 12px;
+  width: 11px;
+  height: 11px;
+  border: 1.5px solid var(--muted);
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+.searchbox::after {
+  content: "";
+  position: absolute;
+  top: 25px;
+  left: 24px;
+  width: 6px;
+  height: 1.5px;
+  background: var(--muted);
+  transform: rotate(45deg);
+  transform-origin: left center;
+  pointer-events: none;
+}
+
+.stocksList {
+  margin-top: 12px;
+  overflow: hidden;
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  background: #0b100c;
+}
+
+.emptyNote {
+  color: var(--muted);
+  font-size: 13px;
+}
+
+@media (max-width: 600px) {
+  .tradeOptions {
+    width: 240px;
+  }
+
+  .sidebar {
+    padding: 20px 14px;
+  }
+}
