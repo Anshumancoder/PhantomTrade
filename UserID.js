@@ -4,7 +4,7 @@ const saveButton = document.getElementById("saveButton")
 let registeredUsers = JSON.parse(localStorage.getItem("phantomTraderUsers")) || []
 export let activeUser = localStorage.getItem("phantomTradeActiveUser")
 
-window.addEventListener("DOMContentLoader", () => {
+window.addEventListener("DOMContentLoaded", () => {
     if(activeUser) {
         usernameInput.value = activeUser
     }

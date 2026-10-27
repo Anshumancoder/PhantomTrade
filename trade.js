@@ -3,9 +3,9 @@ import { activeUser } from "./userID";
 const API_KEY = 'dbfnq89r01qiahua456gdbfnq89r01qiahua4570'
 const socket = new WebSocket(`wss://ws.finnhub.io?token=${API_KEY}`) 
 
-const stockSymbols = JSON.parse(localStorage.getItem(`stockList_${activeUser}`)) || ["APPLE"]
+const stockSymbols = JSON.parse(localStorage.getItem(`stockList_${activeUser}`)) || ["AAPL"]
 
-if (localStorage.getItem(`stockList_${activeUser}`)) {
+if (!localStorage.getItem(`stockList_${activeUser}`)) {
     localStorage.setItem(`stockList_${activeUser}`, JSON.stringify(stockSymbols))
 }
 
@@ -21,11 +21,15 @@ stockSymbols.forEach(Symbol => {
     <span class="stockSymbol">${Symbol}</span>
     <span id="price${Symbol}" class="stockPrice">give it a sec....</span>
     `
+
+    if (stockContainer) {
+        stockContainer.appendChild(stockItem)
+    }
 })
 
 socket.addEventListener("open", () => {
     stockSymbols.forEach(Symbol => {
-        socket.send(JSON.stringify({type: "subscribe", Symbol: Symbol}))
+        socket.send(JSON.stringify({ type: "subscribe", symbol: Symbol }))
     })
 })
 
