@@ -7,7 +7,7 @@
     <title>PhantomTrade</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="trade.css">
-        <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Playfair+Display+SC:ital,wght@0,400;0,700;0,900;1,400;1,700;1,900&display=swap"
@@ -17,7 +17,7 @@
 <body>
 
     <div class="navBar">
-        <a href="index.html">
+        <a href="mainPage.html">
             <p class="mainPageHeading">PhantomTrade</p>
         </a>
         <div class="navButtonsContainer">
@@ -34,22 +34,26 @@
     </div>
 
     <div class="tradeOptions">
-        <aside class="sidebar"> 
-            <div class="watchlistHeading">
+        <aside class="sidebar">
                 <span class="sidebarHeading">Stocks / Trade Options</span>
-            </div>
             <div class="searchbox">
                 <lable class="searchBox">
 
-                    <input id="searchStock" class="searchStocks" type="search" placeholder="Search for a stock" autocomplete="off" aria-label="Search stocks">
+                    <input id="searchStock" class="searchStock" type="search" placeholder="Search for a stock"
+                        autocomplete="off" aria-label="Search stocks">
                 </lable>
-                <div id="stockslist" class="stocksList" aria-label="Stocks List"></div>
-                <p id="stocksListEmpty" class="emptyNote" hidden>Get your info right, there is nth like tht</p>
+                <div id="stockList" class="stockList" aria-label="Stocks List"></div>
+                <p id="stockListEmpty" class="emptyNote" hidden>Get your facts checked, there is nth like tht</p>
             </div>
         </aside>
     </div>
 
+    <div class="stockContainer" id="stockContainer">
+
+    </div>
+
 
 </body>
- <script src="trade.js"></script>
+<script src="trade.js"></script>
+<script src="userID.js"></script>
 </html>
