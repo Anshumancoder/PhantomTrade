@@ -139,12 +139,12 @@ body {
 }
 
 .stockPriceUp {
-  color: var(--green);
+  color: green;
   white-space: nowrap;
 }
 
 .stockPriceDown {
-  color: #ff6b6b;
+  color: red;
   white-space: nowrap;
 }
 

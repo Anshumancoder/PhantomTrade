@@ -4,8 +4,16 @@ const currentUser = activeUser || "defaultUser"
 const API_KEY = 'dbfnq89r01qiahua456gdbfnq89r01qiahua4570'
 const socket = new WebSocket(`wss://ws.finnhub.io?token=${API_KEY}`)
 
-const rawStockSymbols = JSON.parse(localStorage.getItem(`stockList_${currentUser}`)) || ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA","NVDA", "META", "NFLX", "AMD", "JPM", "V","INFY", "WIT","RELIANCE.NS", "TCS.NS"]
+const rawStockSymbols = JSON.parse(localStorage.getItem(`stockList_${currentUser}`)) || ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA","NVDA", "META", "NFLX", "AMD",
+     "JPM", "V","INFY", "WIT","RELIANCE.NS", "TCS.NS","BINANCE:BTCUSDT", "BINANCE:ETHUSDT"]
 const stockSymbols = rawStockSymbols.map(s => s.toUpperCase())
+
+function currency(Symbol) {
+    if(Symbol.endsWith(".NS")) {
+        return "₹"
+    }
+    return "$"
+}
 
 if (!localStorage.getItem(`stockList_${currentUser}`)) {
     localStorage.setItem(`stockList_${currentUser}`, JSON.stringify(stockSymbols))
@@ -24,7 +32,7 @@ stockSymbols.forEach(Symbol => {
         stockItem.id = `stock${Symbol}`
         stockItem.innerHTML = `
             <span class="stockSymbol">${Symbol}</span>
-            <span id="price${Symbol}" class="stockPrice">waiting...</span>
+            <span id="price${Symbol}" class="stockPrice">give it a sec......</span>
         `
         if (stockContainer) {
             stockContainer.appendChild(stockItem)
