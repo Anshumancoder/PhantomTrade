@@ -1,35 +1,41 @@
-import { activeUser } from "./UserID.js";
+import { activeUser } from "./UserID.js"
 
+const currentUser = activeUser || "defaultUser"
 const API_KEY = 'dbfnq89r01qiahua456gdbfnq89r01qiahua4570'
-const socket = new WebSocket(`wss://ws.finnhub.io?token=${API_KEY}`) 
+const socket = new WebSocket(`wss://ws.finnhub.io?token=${API_KEY}`)
 
-const stockSymbols = JSON.parse(localStorage.getItem(`stockList_${activeUser}`)) || ["AAPL"]
+const rawStockSymbols = JSON.parse(localStorage.getItem(`stockList_${currentUser}`)) || ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA","NVDA", "META", "NFLX", "AMD", "JPM", "V","INFY", "WIT","RELIANCE.NS", "TCS.NS"]
+const stockSymbols = rawStockSymbols.map(s => s.toUpperCase())
 
-if (!localStorage.getItem(`stockList_${activeUser}`)) {
-    localStorage.setItem(`stockList_${activeUser}`, JSON.stringify(stockSymbols))
+if (!localStorage.getItem(`stockList_${currentUser}`)) {
+    localStorage.setItem(`stockList_${currentUser}`, JSON.stringify(stockSymbols))
 }
 
 const stockContainer = document.getElementById("stockList")
 const stockPrice = {}
 
+
 stockSymbols.forEach(Symbol => {
     stockPrice[Symbol] = {price: 0, prevPrice: 0}
-    const stockItem = document.createElement("div")
-    stockItem.className = "stockItem"
-    stockItem.id = `stock${Symbol}`
-    stockItem.innerHTML = `
-    <span class="stockSymbol">${Symbol}</span>
-    <span id="price${Symbol}" class="stockPrice">give it a sec....</span>
-    `
 
-    if (stockContainer) {
-        stockContainer.appendChild(stockItem)
+    if (!document.getElementById(`stock${Symbol}`)) {
+        const stockItem = document.createElement("div")
+        stockItem.className = "stockItem"
+        stockItem.id = `stock${Symbol}`
+        stockItem.innerHTML = `
+            <span class="stockSymbol">${Symbol}</span>
+            <span id="price${Symbol}" class="stockPrice">waiting...</span>
+        `
+        if (stockContainer) {
+            stockContainer.appendChild(stockItem)
+        }
     }
 })
 
 socket.addEventListener("open", () => {
     stockSymbols.forEach(Symbol => {
-        socket.send(JSON.stringify({ type: "subscribe", symbol: Symbol }))
+        console.log(`Subscribing to: ${Symbol}`)
+        socket.send(JSON.stringify({type: "subscribe", symbol: Symbol}))
     })
 })
 
@@ -51,8 +57,7 @@ function updateStockUI(Symbol, price, prevPrice) {
 
 socket.addEventListener("message", (event) => {
     const response = JSON.parse(event.data)
-
-    if (response.type === "trade") {
+    if (response.type === "trade" && response.data) {
         response.data.forEach(trade => {
             const Symbol = trade.s
             const currentPrice = trade.p
@@ -65,4 +70,9 @@ socket.addEventListener("message", (event) => {
             }
         })
     }
+})
+
+
+socket.addEventListener("error", (error) => {
+    console.error("WebSocket Error: ", error)
 })
