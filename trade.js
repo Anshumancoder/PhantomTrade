@@ -4,8 +4,9 @@ const currentUser = activeUser || "defaultUser"
 const API_KEY = 'dbfnq89r01qiahua456gdbfnq89r01qiahua4570'
 const socket = new WebSocket(`wss://ws.finnhub.io?token=${API_KEY}`)
 
-const rawStockSymbols = JSON.parse(localStorage.getItem(`stockList_${currentUser}`)) || ["AAPL", "MSFT", "GOOGL", "AMZN", "TSLA","NVDA", "META", "NFLX", "AMD",
-     "JPM", "V","INFY", "WIT","RELIANCE.NS", "TCS.NS","BINANCE:BTCUSDT", "BINANCE:ETHUSDT"]
+const defaultStocks = ["APPL", "MSFT", "GOOGL","AMZN", "TSLA", "NVDA", "META", "NFLX", "AMD", "JPM", "V"]
+
+const rawStockSymbols = JSON.parse(localStorage.getItem(`stockList_${currentUser}`)) || defaultStocks
 const stockSymbols = rawStockSymbols.map(s => s.toUpperCase())
 
 function currency(Symbol) {
@@ -41,14 +42,18 @@ stockSymbols.forEach(Symbol => {
 })
 
 socket.addEventListener("open", () => {
-    stockSymbols.forEach(Symbol => {
-        console.log(`Subscribing to: ${Symbol}`)
-        socket.send(JSON.stringify({type: "subscribe", symbol: Symbol}))
+    stockSymbols.forEach((Symbol, index) => {
+        setTimeout(() => {
+            if (socket.readyState === WebSocket.OPEN) {
+                socket.send(JSON.stringify({ type: "subscribe", symbol: Symbol }))
+            }
+        }, index * 80)
     })
 })
 
 
 function updateStockUI(Symbol, price, prevPrice) {
+    const safeID = Symbol.replace(/[:.]/g, "\\$&")
     const priceElement = document.getElementById(`price${Symbol}`) 
     
     if (!priceElement) return
@@ -78,9 +83,4 @@ socket.addEventListener("message", (event) => {
             }
         })
     }
-})
-
-
-socket.addEventListener("error", (error) => {
-    console.error("WebSocket Error: ", error)
 })
